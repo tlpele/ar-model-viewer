@@ -1,0 +1,72 @@
+const inputElement = document.querySelector("input");
+const modelElement = document.querySelector("model-viewer#cube");
+const frame = document.querySelector("#frame");
+
+const products = [
+  {
+    id: 1, texture: "./textures/air_purifier/Viktor SF-V-001.png", name: "Stadler form", size_x: 1, size_y: 1.83, size_z: 1,
+  },
+  {
+    id: 2, texture: "./textures/air_purifier/XIAOMI Air Purifier 4 Lite.png", name: "XIAOMI Air Purifier", size_x: 1, size_y: 2.22, size_z: 1,
+  },
+];
+
+const x = document.querySelector("#x");
+const y = document.querySelector("#y");
+const z = document.querySelector("#z");
+
+frame.addEventListener("click", () => {
+    modelElement.updateFraming();
+});
+
+const updateScale = () => {
+  modelElement.scale = `${x.value} ${y.value} ${z.value}`;
+};
+
+x.addEventListener("input", () => {
+  updateScale();
+});
+y.addEventListener("input", () => {
+  updateScale();
+});
+z.addEventListener("input", () => {
+  updateScale();
+});
+
+//for input
+// modelElement.addEventListener("load", () => {
+//     const material = modelElement.model.materials[0];
+//     const createAndApplyTexture = async (channel, event) => {
+//         const texture = await modelElement.createTexture(event);
+//         console.log(texture);
+//         if (channel.includes('base') || channel.includes('metallic')) {
+//             material.pbrMetallicRoughness[channel].setTexture(texture);
+//         } else {
+//             material[channel].setTexture(texture);
+//         }
+//     }
+//     inputElement.addEventListener('change', function () {
+//         // var url_glb = URL.createObjectURL(inputElement.files[0]);
+//         var url_texture = URL.createObjectURL(inputElement.files[0]);
+//         // modelElement.src = url_glb;
+//         createAndApplyTexture('baseColorTexture', url_texture);
+//     });
+// });
+
+//for select
+
+modelElement.addEventListener("load", () => {
+  const material = modelElement.model.materials[0];
+  const createAndApplyTexture = async (channel, event) => {
+    const texture = await modelElement.createTexture(event.target.value);
+    if (channel.includes("base") || channel.includes("metallic")) {
+      material.pbrMetallicRoughness[channel].setTexture(texture);
+    } else {
+      material[channel].setTexture(texture);
+    }
+  };
+  document.querySelector("#texture").addEventListener("input", (event) => {
+    console.log(event);
+    createAndApplyTexture("baseColorTexture", event);
+  });
+});

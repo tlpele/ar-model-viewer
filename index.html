@@ -1,25 +1,52 @@
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover"
+    />
     <title>AR Demo</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<body>
+  <body>
     <!-- Import the component -->
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
-    </script>
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
 
+    <!-- <input type="file">  -->
+    <div class="column">
+      <div class="row">
+        <p>Texture:</p>
+        <select id="texture" onchange="myFunction()"></select>
+      </div>
+      <span id="product_type"></span>
+      <div class="row">
+        <label for="myCheck">Auto Scaling:</label>
+        <input type="checkbox" id="autoCheck" onclick="autoScaling()">
+        <label id="size_suggest"></label>
+      </div>
+      <div id="manual_scaling" class="row">
+        <p>Scale:</p>
+        X: <input id="x" value="1" size="3" class="number" /> 
+        Y: <input id="y" value="1" size="3" class="number" />
+        Z: <input id="z" value="1" size="3" class="number" />
+      </div>
+      <div><button id="frame">Update Framing</button></div>
+    </div>
     <!-- Use it like any other HTML element -->
     <model-viewer
-        alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
-        src="./images/1600661545662_Darwin.glb" ar shadow-intensity="1" camera-controls touch-action="pan-y"
-        ios-src="./images/1600661545741_Darwin.usdz">
+      id="cube"
+      alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
+      src="./models/box.glb"
+      ar
+      shadow-intensity="1"
+      camera-controls
+      touch-action="pan-y"
+    >
     </model-viewer>
-
-</body>
-
+    <script src="index.js"></script>
+  </body>
 </html>
