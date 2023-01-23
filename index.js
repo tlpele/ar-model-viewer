@@ -174,6 +174,8 @@ const x = document.querySelector("#x");
 const y = document.querySelector("#y");
 const z = document.querySelector("#z");
 
+const defaultScale = 20;
+
 frame.addEventListener("click", () => {
   modelElement.updateFraming();
 });
@@ -236,12 +238,12 @@ function myFunction() {
     console.log(products[i]);
     if (products[i].id == index) {
       if (checkBox.checked == true) {
-        modelElement.scale = `${products[i].size_x} ${products[i].size_y} ${products[i].size_z}`;
+        modelElement.scale = `${products[i].size_x*defaultScale} ${products[i].size_y*defaultScale} ${products[i].size_z*defaultScale}`;
         scale_x.value = products[i].size_x;
         scale_y.value = products[i].size_y;
         scale_z.value = products[i].size_z;
       } else {
-        modelElement.scale = `${1} ${1} ${1}`;
+        modelElement.scale = `${1*defaultScale} ${1*defaultScale} ${1*defaultScale}`;
         scale_x.value = 1;
         scale_y.value = 1;
         scale_z.value = 1;
